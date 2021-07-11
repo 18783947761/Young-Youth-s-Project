@@ -177,7 +177,7 @@ public class demo1 {
 
 从执行结果可以看出，在第一次添加元素后，数组的容量被初始化为10。之后再往数组中添加数据，数组进行了三次扩容，容量分别增至15，22和33，即以1.5倍的方式扩容。在删除数据时，数组的容量始终保持不变。
 
-![image-20210711143214723](../../../../../AppData/Roaming/Typora/typora-user-images/image-20210711143214723.png)
+![image-20210711183052645](List集合.assets/image-20210711183052645.png)
 
 最后，从上面调用的方法就可以看出，ArrayList是一个线程不安全的集合。
 
@@ -187,11 +187,11 @@ public class demo1 {
 
 LinkedList中维护了size、first和last三个属性，可以快速的获取List的大小以及快速操作首尾节点。
 
-![image-20210711160600620](../../../../../AppData/Roaming/Typora/typora-user-images/image-20210711160600620.png)
+![image-20210711183137503](List集合.assets/image-20210711183137503.png)
 
 节点是一个双向节点
 
-![image-20210711161126340](../../../../../AppData/Roaming/Typora/typora-user-images/image-20210711161126340.png)
+![image-20210711183157820](List集合.assets/image-20210711183157820.png)
 
 添加节点：
 
@@ -292,7 +292,7 @@ E unlink(Node<E> x) {
 
 线程安全的List，操作方法是**同步**的(在方法上加了synchronized关键字)，基本原理与ArrayList极为相似。
 
-![image-20210711164928562](../../../../../AppData/Roaming/Typora/typora-user-images/image-20210711164928562.png)
+![image-20210711183225771](List集合.assets/image-20210711183225771.png)
 
 ```java
 public Vector() {
@@ -340,7 +340,7 @@ public void TestList1() throws InterruptedException {
 }
 ```
 
-![image-20210711145547968](../../../../../AppData/Roaming/Typora/typora-user-images/image-20210711145547968.png)
+![image-20210711183355417](List集合.assets/image-20210711183355417.png)
 
 并且一个线程在遍历List，另一个线程修改List(使用迭代器的方式)，会报ConcurrentModificationException(并发修改异常)。 ---**快速失败机制**(此外，还有安全失败机制，会在Map集合中讲到)
 
@@ -409,7 +409,7 @@ public class ListTest2 {
 }
 ```
 
-![image-20210711151501605](../../../../../AppData/Roaming/Typora/typora-user-images/image-20210711151501605.png)
+![image-20210711183420067](List集合.assets/image-20210711183420067.png)
 
 ### 4.1 Collections.synchronizedList
 
@@ -449,7 +449,7 @@ static class SynchronizedList<E>
 }
 ```
 
-![image-20210711153053657](../../../../../AppData/Roaming/Typora/typora-user-images/image-20210711153053657.png)
+![image-20210711183457323](List集合.assets/image-20210711183457323.png)
 
 ### 4.2  CopyOnWriteArrayList
 
@@ -579,8 +579,11 @@ public class ListTest {
 }
 ```
 
-![image-20210711155245908](../../../../../AppData/Roaming/Typora/typora-user-images/image-20210711155245908.png)
+![image-20210711183526786](List集合.assets/image-20210711183526786.png)
 
-可以看出，在增删元素时，Collections.synchronizedList的性能要优于CopyOnWriteArrayList；在查找元素时，CopyOnWriteArrayList要优于Collections.synchronizedList。这是因为在增删元素时，Collections.synchronizedList仅仅是加了锁，而CopyOnWriteArrayList不仅加了锁，还进行了内存复制操作；在读取元素时，CopyOnWriteArrayList既没加锁，也没进行内存复制，因此耗时低于Collections.synchronizedList。
+
+
+从测试结果可以看出，在增删元素时，Collections.synchronizedList的性能要优于CopyOnWriteArrayList；在查找元素时，CopyOnWriteArrayList要优于Collections.synchronizedList。这是因为在增删元素时，Collections.synchronizedList仅仅是加了锁，而CopyOnWriteArrayList不仅加了锁，还进行了内存复制操作；在读取元素时，CopyOnWriteArrayList既没加锁，也没进行内存复制，因此耗时低于Collections.synchronizedList。
 
 以上就是关于List集合的全部内容，若有错误，欢迎指正！
+
